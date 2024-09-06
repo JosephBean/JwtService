@@ -15,7 +15,7 @@ USE company;
 CREATE TABLE `user` (
 	userNo 			INT 				NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	userNm 			VARCHAR(50) 	NOT NULL,
-	userPwd			VARCHAR(50)		NOT NULL,
+	userPwd			VARCHAR(100)	NOT NULL,
 	userEnable		BOOLEAN			NOT NULL DEFAULT 1
 );
 

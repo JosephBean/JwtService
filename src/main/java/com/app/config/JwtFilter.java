@@ -62,6 +62,8 @@ public class JwtFilter extends OncePerRequestFilter {
 		if(authorization != null && !authorization.isEmpty()) {
 			if(jwtToken.isValidToken(authorization)) {
 				setAuthentication.accept(getUserName.apply(jwtToken.getUser(authorization)));
+			} else {
+				// 토큰 재발급 로직!!
 			}
 		}
 		log.info("========================JwtFilter=============================");

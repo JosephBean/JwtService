@@ -43,4 +43,18 @@ public class JwtService {
 				.build();
 	}
 	
+	public TokenDTO sign(UserDTO userDTO) {
+		UserDTO user = authMapper.findByUser(userDTO.getUserNm()).orElseThrow();
+		boolean state = false;
+		String jwt = null;
+		if( passwordEncoder.matches(userDTO.getUserPwd(), user.getUserPwd()) ) {
+			state = true;
+			jwt = jwtToken.setToken(user);
+		}
+		return TokenDTO.builder()
+				.state(state)
+				.token(jwt)
+				.build();
+	}
+	
 }

@@ -21,10 +21,11 @@ public class WebSecurity {
 	
 	@Autowired
 	private JwtFilter jwtFilter;
-	
+
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		// 스프링 필터 비활성화
+//		http.csrf(Customizer.withDefaults());
 		http.csrf(AbstractHttpConfigurer::disable);
 		http.formLogin(AbstractHttpConfigurer::disable);
 		http.logout(AbstractHttpConfigurer::disable);
@@ -41,6 +42,7 @@ public class WebSecurity {
 			req.requestMatchers("/**").permitAll(); // 해당 URL 접근 허용
 //			req.anyRequest().authenticated(); // 나머지 URL 접근 막기
 		});
+
 		return http.build();
 	}
 	
@@ -51,7 +53,7 @@ public class WebSecurity {
 	
 	private CorsConfiguration corsOrigin() {
 		CorsConfiguration corsConfig = new CorsConfiguration();
-        corsConfig.setAllowedOrigins(Arrays.asList("http://127.0.0.1:5500", "http://localhost:5500")); // 허용할 도메인
+        corsConfig.setAllowedOrigins(Arrays.asList("http://127.0.0.1:5500", "http://localhost:5500", "http://127.0.0.1:8080", "http://localhost:8080", "http://192.168.0.56:8080", "http://127.0.0.1:3000", "http://localhost:3000")); // 허용할 도메인
         corsConfig.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH")); // 허용할 메서드
         corsConfig.setAllowedHeaders(Arrays.asList("*")); // 허용할 헤더
         corsConfig.setAllowCredentials(true); // 자격 증명 허용
